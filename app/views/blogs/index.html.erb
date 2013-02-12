@@ -1,0 +1,40 @@
+<h1>Listing blogs</h1>
+
+<table>
+  <tr>
+    <th>Titel</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @blogs.each do |blog| %>
+  <tr>
+    <td><%= blog.titel %></td>
+    <td><%= blog.description %></td>
+    <td><%= link_to 'Show', blog %></td>
+    <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+    <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+
+      <% blog.posts.latest.each do |post| %>
+      <tr>
+        <td>&nbsp;</td>
+        <td><%= link_to display_post_name(post), blog_post_path(blog, post) %></td>
+      </tr>
+      <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Blog', new_blog_path %>
+<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+
+<% content_for :sidebar do -%>
+     test test test
+<% end -%>
+
+<%= breadcrumbs %>
